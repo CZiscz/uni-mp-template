@@ -7,7 +7,6 @@
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
     }
   },
-
   "pages": [
     //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
@@ -19,6 +18,8 @@
     {
       "path": "pages/my/my",
       "style": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
         "navigationBarTitleText": "我的"
       }
     },
@@ -80,6 +81,7 @@
       }
     ]
   },
+
   // 分包加载规则
   "subPackages": [
     // 子包根目录
@@ -100,14 +102,14 @@
             "navigationBarTitleText": "个人信息"
           }
         }
-      ]
+      ],
+      // 分包预下载规则
+      "preloadRule": {
+        "pages/my/my": {
+          "network": "all",
+          "packages": ["pagesMember"]
+        }
+      }
     }
-  ],
-  // 分包预下载规则
-  "preloadRule": {
-    "pages/my/my": {
-      "network": "all",
-      "packages": ["pagesMember"]
-    }
-  }
+  ]
 }

@@ -1,9 +1,10 @@
 <script setup lang="ts">
-//
+import { useMemberStore } from '@/stores'
+
 const memberStore = useMemberStore()
 
 // 退出登录
-const onLoadout = () => {
+const onLogout = () => {
   // 弹窗提示
   uni.showModal({
     content: '是否退出登录',
@@ -39,7 +40,7 @@ const onLoadout = () => {
     </view>
     <!-- 操作按钮 -->
     <view class="action">
-      <view class="button" @tap="onLoadout">退出登录</view>
+      <view class="button" @tap="onLogout">退出登录</view>
     </view>
   </view>
 </template>
