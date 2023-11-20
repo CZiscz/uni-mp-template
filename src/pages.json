@@ -12,6 +12,8 @@
     {
       "path": "pages/index/index",
       "style": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "white",
         "navigationBarTitleText": "首页"
       }
     },
@@ -39,6 +41,30 @@
       "path": "pages/login/login",
       "style": {
         "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/hot/hot",
+      "style": {
+        "navigationBarTitleText": "hot"
+      }
+    },
+    {
+      "path": "pages/goods/goods",
+      "style": {
+        "navigationBarTitleText": "商品详情"
+      }
+    },
+    {
+      "path": "pages/goods/components/AddressPanel",
+      "style": {
+        "navigationBarTitleText": "AddressPanel"
+      }
+    },
+    {
+      "path": "pages/goods/components/ServicePanel",
+      "style": {
+        "navigationBarTitleText": "ServicePanel"
       }
     }
   ],
@@ -81,7 +107,6 @@
       }
     ]
   },
-
   // 分包加载规则
   "subPackages": [
     // 子包根目录
@@ -101,15 +126,27 @@
             "navigationBarTextStyle": "white",
             "navigationBarTitleText": "个人信息"
           }
+        },
+        {
+          "path": "address/address",
+          "style": {
+            "navigationBarTitleText": "地址管理"
+          }
+        },
+        {
+          "path": "address/address-form",
+          "style": {
+            "navigationBarTitleText": "编辑地址"
+          }
         }
-      ],
-      // 分包预下载规则
-      "preloadRule": {
-        "pages/my/my": {
-          "network": "all",
-          "packages": ["pagesMember"]
-        }
-      }
+      ]
     }
-  ]
+  ],
+  // 分包预下载规则
+  "preloadRule": {
+    "pages/my/my": {
+      "network": "all",
+      "packages": ["pagesMember"]
+    }
+  }
 }
