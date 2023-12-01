@@ -1,50 +1,40 @@
-/** 封装通用信息 */
-type BaseProfile = {
-  /** 用户ID */
-  id: number
-  /** 头像  */
-  avatar: string
-  /** 账户名  */
-  account: string
-  /** 昵称 */
-  nickname?: string
+declare type LoginParams = {
+  code: string
 }
 
-/** 小程序登录 登录用户信息 */
-declare type LoginResult = BaseProfile & {
+declare type LoginResult = {
+  /** 用户id */
+  id: number
+  /** 头像 */
+  avatar: string
+  /** 账户名 */
+  account: string
+  /** 昵称 */
+  nickname: string
   /** 手机号 */
   mobile: string
   /** 登录凭证 */
   token: string
 }
 
-declare type LoginParams = {
-  code: string
-  // encryptedData?: string
-  // iv?: string
-}
-
 /** 个人信息 用户详情信息 */
-declare type ProfileDetail = BaseProfile & {
+declare type ProfileDetail = {
+  /** ⽤户ID */
+  id: number
+  /** 头像 */
+  avatar: string
+  /** 账户名 */
+  account: string
+  /** 昵称 */
+  nickname?: string
   /** 性别 */
   gender?: Gender
-  /** 生日 */
+  /** ⽣⽇ */
   birthday?: string
+  /** 省市区 */
+  fullLocation?: string
   /** 职业 */
   profession?: string
-  /** 省 */
-  provinceCode?: string
-  /** 市 */
-  cityCode?: string
-  /** 区 */
-  countyCode?: string
-}
-/** 性别 */
-// declare type Gender = '女' | '男'
-declare type Gender = 1 | 0
-
-/** 个人信息 修改请求体参数 */
-declare type ProfileParams = Pick<ProfileDetail, 'nickname' | 'gender' | 'birthday' | 'profession'> & {
   /** 省份编码 */
   provinceCode?: string
   /** 城市编码 */
@@ -52,6 +42,18 @@ declare type ProfileParams = Pick<ProfileDetail, 'nickname' | 'gender' | 'birthd
   /** 区/县编码 */
   countyCode?: string
 }
+/** 性别 0-男  1-女 */
+declare type Gender = 0 | 1
+
+// /** 个⼈信息 修改请求体参数 */
+// declare type ProfileParams = Pick<ProfileDetail, 'nickname' | 'gender' | 'birthday' | 'profession'> & {
+//   /** 省份编码 */
+//   provinceCode?: string
+//   /** 城市编码 */
+//   cityCode?: string
+//   /** 区/县编码 */
+//   countyCode?: string
+// }
 
 /** 首页-广告区域数据类型 */
 declare type BannerItem = {
@@ -294,7 +296,6 @@ type CartItem = {
   id: string
   /** 商品 ID */
   goodsId: string
-
   /** SKU ID */
   // skuId?: string
   /** 商品名称 */

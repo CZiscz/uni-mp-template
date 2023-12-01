@@ -1,5 +1,5 @@
-<script lang="ts" setup>
-// const props = defineProps({})
+<script setup lang="ts">
+// 子组件调用父组件方法
 const emit = defineEmits<{
   (event: 'close'): void
 }>()

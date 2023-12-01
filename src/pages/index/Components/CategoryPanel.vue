@@ -1,5 +1,5 @@
 <script setup lang="ts">
-//
+// 定义prop接收
 defineProps<{
   list: CategoryItem[]
 }>()

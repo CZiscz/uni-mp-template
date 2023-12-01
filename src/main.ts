@@ -1,16 +1,18 @@
 import { createSSRApp } from 'vue'
 import pinia from './stores'
-import 'virtual:windi-base.css'
-import 'virtual:windi-components.css'
-import 'virtual:windi-utilities.css'
-
 import App from './App.vue'
+
 export function createApp() {
   const app = createSSRApp(App)
-
+  // 引入pinia状态管理
   app.use(pinia)
   return {
     app,
-    pinia // 此处必须将 Pinia 返回
+    pinia
   }
 }
+
+// 引入windiCSS
+import 'virtual:windi-base.css'
+import 'virtual:windi-components.css'
+import 'virtual:windi-utilities.css'

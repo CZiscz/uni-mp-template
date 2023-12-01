@@ -12,6 +12,11 @@ import type {
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync()
 
+// 参数接收
+const query = defineProps<{
+  id: string
+}>()
+
 //定义枚举，按钮模式
 enum SkuMode {
   Both = 1,
@@ -29,15 +34,12 @@ const openSkuPopup = (val: SkuMode) => {
   mode.value = val
 }
 
-const query = defineProps<{
-  id: string
-}>()
-
 // 获取商品详细信息
 const goods = ref<GoodsResult>()
 const getGoodsByIdData = async () => {
   const res = await getGoodsByIdAPI(query.id)
   goods.value = res.result
+
   // SKU组件所需格式
   localdata.value = {
     _id: res.result.id,
@@ -74,7 +76,7 @@ const onTapImage = (url: string) => {
   })
 }
 
-//uni-ui 弹出层组件 ref
+// uni-ui 弹出层组件 ref
 const popup = ref<{
   open: (type?: UniHelper.UniPopupType) => void
   close: () => void
@@ -101,10 +103,16 @@ const selectArrText = computed(() => {
   return skuPopuRef.value?.selectArr?.join(' ').trim() || '请选择商品规格'
 })
 
+// 加入购物车
 const onAddCart = async (ev: SkuPopupEvent) => {
   await postMemberCartAPI({ attrsText: selectArrText.value, count: ev.buy_num, id: ev.goods_id })
-  uni.showToast({
-    title: '添加成功'
+  uni.showToast({ title: '添加成功' })
+  isShowSku.value = false
+}
+// 立即购买
+const onByNow = (ev: SkuPopupEvent) => {
+  uni.navigateTo({
+    url: `/pagesOrder/create/create?id=${ev.goods_id}&count=${ev.buy_num}&attrsText=${selectArrText.value}`
   })
   isShowSku.value = false
 }
@@ -114,7 +122,7 @@ const onAddCart = async (ev: SkuPopupEvent) => {
   <!-- SKU弹窗组件 -->
   <vk-data-goods-sku-popup
     @add-cart="onAddCart"
-    :sku-list="localdata.sku_list"
+    @buy-now="onByNow"
     v-model="isShowSku"
     :localdata="localdata"
     :mode="mode"
@@ -224,7 +232,7 @@ const onAddCart = async (ev: SkuPopupEvent) => {
     <view class="icons">
       <button class="icons-button"><text class="icon-heart"></text>收藏</button>
       <button class="icons-button" open-type="contact"> <text class="icon-handset"></text>客服 </button>
-      <navigator class="icons-button" url="/pages/cart/cart" open-type="switchTab">
+      <navigator class="icons-button" url="/pages/cart/cart2" open-type="navigate">
         <text class="icon-cart"></text>购物车
       </navigator>
     </view>

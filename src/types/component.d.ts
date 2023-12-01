@@ -1,6 +1,6 @@
 import 'vue'
-import Guess from '@/components/Guess/Guess.vue'
-import wSwiper from '@/components/wSwiper/wSwiper.vue'
+import wGuess from '@/components/guess/Guess.vue'
+import wSwiper from '@/components/swiper/wSwiper.vue'
 
 declare module 'vue' {
   export interface GlobalComponents {
